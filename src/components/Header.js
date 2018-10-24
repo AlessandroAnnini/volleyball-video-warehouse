@@ -10,6 +10,8 @@ import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import AddIcon from '@material-ui/icons/Add';
 import ViewListIcon from '@material-ui/icons/ViewList';
+import CodeIcon from '@material-ui/icons/Code';
+import Tooltip from '@material-ui/core/Tooltip';
 
 const styles = {
   root: {
@@ -47,6 +49,11 @@ function ButtonAppBar(props) {
                   <ViewListIcon />
                 </IconButton>
               </Link>
+              <Tooltip title="v 0.1">
+                <IconButton color="inherit" style={{ color: '#fff' }}>
+                  <CodeIcon />
+                </IconButton>
+              </Tooltip>
             </Toolbar>
           </AppBar>
         </div>
