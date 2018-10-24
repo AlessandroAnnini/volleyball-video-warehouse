@@ -64,23 +64,20 @@ const definition = {
       name: 'teamHome',
       component: 'TextField',
       label: 'Team Home',
-      required: true,
-      block: false
+      required: true
     },
     {
       fullWidth: true,
       name: 'teamAway',
       component: 'TextField',
       label: 'Team Away',
-      required: true,
-      block: false
+      required: true
     },
     {
       fullWidth: true,
       name: 'date',
       component: 'DateField',
       label: 'Date'
-      //   required: true
     },
     {
       fullWidth: true,
@@ -98,7 +95,8 @@ const definition = {
       fullWidth: true,
       name: 'scoreDetail',
       component: 'TextField',
-      label: 'Score Detail'
+      label: 'Score Detail',
+      help: 'something like "25-19, 11-25, 25-8, 25-15"'
     },
     {
       fullWidth: true,
@@ -108,7 +106,7 @@ const definition = {
       required: true
     },
     {
-      fullWidth: true,
+      fullWidth: false,
       name: 'isYoutube',
       component: 'BooleanField',
       label: 'is on youtube'
@@ -118,7 +116,8 @@ const definition = {
       fullWidth: true,
       name: 'tag',
       component: 'TextField',
-      label: 'Video Tags'
+      label: 'Video Tags',
+      help: 'words divided by a comma <,>'
     },
     {
       fullWidth: true,
@@ -139,17 +138,6 @@ const definition = {
       label: 'Reset',
       icon: 'Clear'
     }
-  ],
-  validators: [
-    {
-      where: {
-        'fields.email.value': 'nope@example.com'
-      },
-      error: {
-        field: 'email',
-        error: 'must not be {{fields.email.value}}'
-      }
-    }
   ]
 };
 
@@ -165,7 +153,7 @@ class AddVideo extends PureComponent {
     const form = compiler.newComponent(definition);
     this.setState({ form });
 
-    this.loadValues(form);
+    // this.loadValues(form);
 
     form.on('submit', this.handleSubmit);
     form.on('reset', this.handleReset);
