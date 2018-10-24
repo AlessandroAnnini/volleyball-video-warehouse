@@ -84,6 +84,21 @@ class AddVideo extends Component {
               justify="center"
               alignItems="center"
             >
+              <Link to="/addVideo">
+                <Button
+                  style={{
+                    position: 'fixed',
+                    bottom: '20px',
+                    right: '20px'
+                  }}
+                  variant="fab"
+                  color="primary"
+                  aria-label="Add"
+                  className={classes.button}
+                >
+                  <AddIcon />
+                </Button>
+              </Link>
               <Query query={GET_VIDEOS}>
                 {({ loading, error, data, refetch }) => {
                   if (loading) return 'Loading...';
@@ -91,21 +106,6 @@ class AddVideo extends Component {
                   if (data && !data.videos) return 'No data';
                   return data.videos.map(video => (
                     <div>
-                      <Link to="/addVideo">
-                        <Button
-                          style={{
-                            position: 'fixed',
-                            bottom: '20px',
-                            right: '20px'
-                          }}
-                          variant="fab"
-                          color="primary"
-                          aria-label="Add"
-                          className={classes.button}
-                        >
-                          <AddIcon />
-                        </Button>
-                      </Link>
                       <Grid item xs={12} sd={6} md={4}>
                         <VideoCard
                           key={video.id}
