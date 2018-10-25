@@ -7,10 +7,10 @@ import red from '@material-ui/core/colors/red';
 import CardActions from '@material-ui/core/CardActions';
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const styles = theme => ({
   card: {
-    minWidth: 300,
     margin: theme.spacing.unit * 2
   },
   media: {
@@ -38,6 +38,11 @@ const styles = theme => ({
   }
 });
 
+const formatDate = d => {
+  const dd = new Date(d);
+  return `${dd.getDate()}/${dd.getMonth() + 1}/${dd.getFullYear()}`;
+};
+
 class RecipeReviewCard extends React.Component {
   render() {
     const { classes } = this.props;
@@ -58,14 +63,24 @@ class RecipeReviewCard extends React.Component {
 
     return (
       <Card className={classes.card}>
-        <CardHeader title={title} subheader={date} />
-        <iframe
-          title={title}
-          src={isYoutube ? `https://www.youtube.com/embed/${url}` : url}
-          frameborder="0"
-          allow="autoplay; encrypted-media"
-          allowfullscreen
-        />
+        <CardHeader title={title} subheader={formatDate(date)} />
+        <div
+          style={{
+            backgroundImage: `url(https://img.youtube.com/vi/${url}/default.jpg)`,
+            backgroundSize: 'cover',
+            width: '100%',
+            height: '230px'
+          }}
+        >
+          <iframe
+            style={{ width: '100%', height: '230px' }}
+            title={title}
+            src={isYoutube ? `https://www.youtube.com/embed/${url}` : url}
+            frameborder="0"
+            allow="autoplay; encrypted-media"
+            allowfullscreen
+          />
+        </div>
         <CardContent>
           <ul>
             <li>{url}</li>

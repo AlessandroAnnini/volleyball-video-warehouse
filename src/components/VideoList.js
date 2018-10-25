@@ -74,39 +74,33 @@ class AddVideo extends Component {
   render() {
     const { classes } = this.props;
     return (
-      <Mutation mutation={DELETE_VIDEO}>
-        {(deleteVideo, { data }) => (
-          <div className={classes.root}>
-            <Grid
-              container
-              spacing={16}
-              direction="row"
-              justify="center"
-              alignItems="center"
-            >
-              <Link to="/addVideo">
-                <Button
-                  style={{
-                    position: 'fixed',
-                    bottom: '20px',
-                    right: '20px'
-                  }}
-                  variant="fab"
-                  color="primary"
-                  aria-label="Add"
-                  className={classes.button}
-                >
-                  <AddIcon />
-                </Button>
-              </Link>
-              <Query query={GET_VIDEOS}>
-                {({ loading, error, data, refetch }) => {
-                  if (loading) return 'Loading...';
-                  if (error) return `Error! ${error.message}`;
-                  if (data && !data.videos) return 'No data';
-                  return data.videos.map(video => (
-                    <div>
-                      <Grid item xs={12} sd={6} md={4}>
+      <div>
+        <Link to="/addVideo">
+          <Button
+            style={{
+              position: 'fixed',
+              bottom: '20px',
+              right: '20px'
+            }}
+            variant="fab"
+            color="primary"
+            aria-label="Add"
+            className={classes.button}
+          >
+            <AddIcon />
+          </Button>
+        </Link>
+        <Mutation mutation={DELETE_VIDEO}>
+          {(deleteVideo, { data }) => (
+            <div className={classes.root}>
+              <Grid container spacing={8} direction="row" alignItems="center">
+                <Query query={GET_VIDEOS}>
+                  {({ loading, error, data, refetch }) => {
+                    if (loading) return 'Loading...';
+                    if (error) return `Error! ${error.message}`;
+                    if (data && !data.videos) return 'No data';
+                    return data.videos.map(video => (
+                      <Grid item sd={12} md={6} lg={4}>
                         <VideoCard
                           key={video.id}
                           data={video}
@@ -129,24 +123,24 @@ class AddVideo extends Component {
                           }}
                         />
                       </Grid>
-                    </div>
-                  ));
+                    ));
+                  }}
+                </Query>
+              </Grid>
+              <Snackbar
+                anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+                open={this.state.isSnackOpen}
+                onClose={this.snackClose}
+                autoHideDuration={3000}
+                ContentProps={{
+                  'aria-describedby': 'message-id'
                 }}
-              </Query>
-            </Grid>
-            <Snackbar
-              anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
-              open={this.state.isSnackOpen}
-              onClose={this.snackClose}
-              autoHideDuration={3000}
-              ContentProps={{
-                'aria-describedby': 'message-id'
-              }}
-              message={<span id="message-id">{this.state.snackMessage}</span>}
-            />
-          </div>
-        )}
-      </Mutation>
+                message={<span id="message-id">{this.state.snackMessage}</span>}
+              />
+            </div>
+          )}
+        </Mutation>
+      </div>
     );
   }
 }

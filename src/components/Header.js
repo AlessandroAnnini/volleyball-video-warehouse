@@ -49,7 +49,7 @@ function ButtonAppBar(props) {
                   <ViewListIcon />
                 </IconButton>
               </Link>
-              <Tooltip title="v 0.1">
+              <Tooltip title="v 0.2">
                 <IconButton color="inherit" style={{ color: '#fff' }}>
                   <CodeIcon />
                 </IconButton>
